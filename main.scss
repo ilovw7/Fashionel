@@ -1,0 +1,278 @@
+@use "sass:math";
+
+//Fonts
+@font-face {
+  font-family: "Lato-Regular";
+  src: url(fonts/Lato-Regular.woff2);
+}
+
+@font-face {
+  font-family: "Lato-Light";
+  src: url(fonts/Lato-Light.woff2);
+}
+
+@font-face {
+  font-family: "Lato-Bold";
+  src: url(fonts/Lato-Bold.woff2);
+}
+
+@font-face {
+  font-family: "Lusitana-Regular";
+  src: url(fonts/Lusitana-Regular.woff2);
+}
+
+@font-face {
+  font-family: "Lusitana-Bold";
+  src: url(fonts/Lusitana-Bold.woff2);
+}
+
+//Reset
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+
+//Mixins
+@mixin primary-button {
+  padding: 5px 15px;
+  background-color: $color-white;
+  color: $color-light-black;
+  border: 1px solid $color-light-black;
+  transition: color .5s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-light-black;
+    color: $color-white;
+    transition: color .5s ease-in-out;
+  }
+}
+
+@mixin secondary-button {
+  padding: 5px 15px;
+  background-color: $color-white;
+  color: $color-light-black;
+  border: 1px solid transparent;
+  transition: border-color .5s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-red;
+    border-color: $color-red;
+    transition: border-color .5s ease-in-out;
+  }
+}
+
+@mixin category-size ($height, $width) {
+  height: $height;
+  max-width: $width;
+  display: flex;
+}
+
+//Responsive
+//Nachin 1
+@mixin laptop {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 348px) {
+    @content;
+  }
+}
+
+//functions for responsive mixins
+
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min !=0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - .02px, null);
+}
+
+//Nachin 2
+@mixin media-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+
+
+@mixin media-down($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($breakpoints);
+  $current: map-get($breakpoints, $name);
+  $current-max: $current - .02px;
+
+  @if $min {
+
+    @media (max-width: $min) {
+      @content;
+    }
+
+  }
+
+  @else {
+    @content;
+  }
+}
+
+//Variables
+$color-black: #000;
+$color-white: #fff;
+$color-light-black: #2b2d42;
+$color-gray: #8d99ae;
+$color-dirty-white: #edf2f4;
+$color-ligt-red: #ef233c;
+$color-red:#d90429;
+$font-lato-light: "Lato-Light";
+$font-lato-regular: "Lato-Regular";
+$font-lato-bold: "Lato-Bold";
+$font-lusitana-regular: "Lusitana-Regular";
+$font-lusitana-bold: "Lusitana-Bold";
+$font-size-title: 22px;
+$font-size-subtitle: 20px;
+$font-size-text: 18px;
+
+//Variables for responsive desing
+$grid-breakpoints: ("laptop": 1024px,
+  "tablet": 768px,
+  "mobile": 368px,
+);
+
+//SCSS Edit
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-ligt-red;
+  padding: 10px 25px;
+  align-items: center;
+
+
+  nav {
+    display: flex;
+    font-size: $font-size-subtitle;
+
+    p {
+      padding: 0 15px;
+      text-transform: uppercase;
+      transition: border-color .3s linear;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      margin: 0 5px;
+
+      &:hover {
+        transition: border-color .3s linear;
+        border-color: $color-red;
+
+      }
+    }
+
+    // @include media-up(mobile) {
+    //   flex-direction: column
+    // }
+  }
+}
+
+main {
+  .hero-shot {
+    @include category-size(50vh, 1024px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: $font-lusitana-bold;
+    font-size: $font-size-title;
+    color: $color-light-black;
+    margin: 10px auto;
+    font-weight: bolder;
+
+    p {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    img {
+      margin: 0 10px;
+    }
+
+    .about-us {
+      display: flex;
+      color: $color-light-black;
+      font-family: $font-lusitana-bold;
+      font-size: $font-size-title;
+      align-items: center;
+      margin: 15px 0;
+
+      .about-us-btn {
+        @include primary-button();
+        margin: 0 10px;
+        margin-left: 0;
+      }
+    }
+
+
+
+  }
+
+  .category {
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+
+    &-title {
+      font-family: $font-lusitana-bold;
+      font-weight: bolder;
+      font-size: $font-size-title;
+      text-transform: uppercase;
+      margin: 10px;
+      text-align: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid $color-gray;
+    }
+
+    &-images {
+      margin: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      img {
+        margin: 10px;
+      }
+    }
+  }
+}

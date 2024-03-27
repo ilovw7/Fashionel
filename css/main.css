@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Lato-Regular";
+  src: url(fonts/Lato-Regular.woff2);
+}
+@font-face {
+  font-family: "Lato-Light";
+  src: url(fonts/Lato-Light.woff2);
+}
+@font-face {
+  font-family: "Lato-Bold";
+  src: url(fonts/Lato-Bold.woff2);
+}
+@font-face {
+  font-family: "Lusitana-Regular";
+  src: url(fonts/Lusitana-Regular.woff2);
+}
+@font-face {
+  font-family: "Lusitana-Bold";
+  src: url(fonts/Lusitana-Bold.woff2);
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #8d99ae;
+  padding: 10px 25px;
+  align-items: center;
+}
+header nav {
+  display: flex;
+  font-size: 20px;
+}
+header nav p {
+  padding: 0 15px;
+  text-transform: uppercase;
+  transition: border-color 0.3s linear;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  margin: 0 5px;
+}
+header nav p:hover {
+  transition: border-color 0.3s linear;
+  border-color: #d90429;
+}
+
+main .hero-shot {
+  height: 50vh;
+  max-width: 1024px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: "Lusitana-Bold";
+  font-size: 22px;
+  color: #2b2d42;
+  margin: 10px auto;
+  font-weight: bolder;
+}
+main .hero-shot p {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+main .hero-shot img {
+  margin: 0 10px;
+}
+main .hero-shot .about-us {
+  display: flex;
+  color: #2b2d42;
+  font-family: "Lusitana-Bold";
+  font-size: 22px;
+  align-items: center;
+  margin: 15px 0;
+}
+main .hero-shot .about-us .about-us-btn {
+  padding: 5px 15px;
+  background-color: #fff;
+  color: #2b2d42;
+  border: 1px solid #2b2d42;
+  transition: color 0.5s ease-in-out;
+  cursor: pointer;
+  margin: 0 10px;
+  margin-left: 0;
+}
+main .hero-shot .about-us .about-us-btn:hover {
+  background-color: #2b2d42;
+  color: #fff;
+  transition: color 0.5s ease-in-out;
+}
+main .category {
+  max-width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+main .category-title {
+  font-family: "Lusitana-Bold";
+  font-weight: bolder;
+  font-size: 22px;
+  text-transform: uppercase;
+  margin: 10px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #8d99ae;
+}
+main .category-images {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+main .category-images img {
+  margin: 10px;
+}
